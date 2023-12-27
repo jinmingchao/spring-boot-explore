@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 import java.util.Arrays;
 
 @SpringBootApplication
-public class StarterApplication {
+public class ApplicationStarter {
 
     public static void main(String[] args) {
 //        System.out.println("args.length: " + args.length);
@@ -19,7 +19,7 @@ public class StarterApplication {
 //        }
 //        args = new String[1];
 //        args[0] = "abC";
-        SpringApplication.run(StarterApplication.class, args);
+        SpringApplication.run(ApplicationStarter.class, args);
     }
 
 
