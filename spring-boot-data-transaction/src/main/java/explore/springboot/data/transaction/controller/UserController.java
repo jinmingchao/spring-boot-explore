@@ -1,7 +1,6 @@
 package explore.springboot.data.transaction.controller;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import explore.springboot.data.transaction.mapper.User;
 import explore.springboot.data.transaction.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;

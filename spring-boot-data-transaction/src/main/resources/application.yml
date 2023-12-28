@@ -4,9 +4,21 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://${MYSQL_HOST}:3306/spring_boot_explore
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:p6spy:mysql://${MYSQL_HOST:localhos}:${MYSQL_POST:3306}/spring_boot_explore
+    driver-class-name: ${MYSQL_DRIVER_CLASS:com.mysql.cj.jdbc.Driver}
   sql:
     init:
       schema-locations: classpath:db/schema-h2.sql
       data-locations: classpath:db/data-h2.sql
+  profiles:
+    include:
+      - mysqlconf
+      - spyconf
+#      - spyy.properties
+
+logging:
+  level:
+    # 指定整个项目的日志级别
+    root: info
+
+
