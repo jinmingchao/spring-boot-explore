@@ -21,6 +21,22 @@
                     <target>16</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>16</source>
+                    <target>16</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>16</source>
+                    <target>16</target>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <parent>
@@ -64,13 +80,6 @@
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis.plus.version}</version>
             </dependency>
-           <!-- p6spy 日志插件 start -->
-            <dependency>
-                <groupId>p6spy</groupId>
-                <artifactId>p6spy</artifactId>
-                <version>3.9.1</version>
-            </dependency>
-            <!-- p6spy 日志插件 end -->
             <!-- mybatis plus end -->
             <!-- lombok Start -->
             <dependency>
@@ -80,11 +89,6 @@
             </dependency>
             <!-- lombok End -->
             <!-- test dependencies start -->
-<!--            <dependency>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-test</artifactId>-->
-<!--                <version>${springboot.test.version}</version>-->
-<!--            </dependency>-->
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-api</artifactId>
@@ -105,8 +109,6 @@
                 <version>${fastjson2.version}</version>
             </dependency>
             <!-- data format end -->
-
-
         </dependencies>
     </dependencyManagement>
 </project>
