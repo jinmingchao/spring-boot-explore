@@ -1,0 +1,26 @@
+
+
+server:
+  port: 8000
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://192.168.239.11:3306}/spring_boot_explore
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      schema-locations: classpath:db/schema-h2.sql
+      data-locations: classpath:db/data-h2.sql
+  profiles:
+    include:
+#     - mysqlconf
+#      - spyy.properties
+#logging:
+#  level:
+#    # 指定整个项目的日志级别
+#    root: info
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #com.baomidou.mybatisplus.extension.p6spy.StdoutLogger
+

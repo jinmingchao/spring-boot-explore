@@ -3,7 +3,7 @@
 <mapper namespace="explore.springboot.data.transaction.mapper.UserMapper.java">
 
     <!--    Map<String, Object> selectUserById(Long id);-->
-    <select id="selectUserById" resultType="java.util.Map">
+    <select id="selectUserById" resultType="java.util.List">
             select * from user_info where id = ${id}
     </select>
 </mapper>

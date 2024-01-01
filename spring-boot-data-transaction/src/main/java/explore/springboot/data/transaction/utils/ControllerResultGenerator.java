@@ -1,54 +1,38 @@
 package explore.springboot.data.transaction.utils;
 
+import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import java.util.List;
 
 
-public class ControllerResultGenerator<T extends Object, RS extends Collection, TYPE > {
+public class ControllerResultGenerator<T extends Object, RS extends Collection> {
 
     public JSONObject generateResultObject(RS resultSet) {
         try {
+            JSONObject rs = null;
             if (!(resultSet instanceof java.util.List) && !(resultSet instanceof java.util.Map)) {
                 return null;
             }
 
-            JSONObject rs = new JSONObject();
+            rs = new JSONObject();
             rs.put("code", 200);
             rs.put("msg", "success");
 
             if (resultSet instanceof java.util.List) {
-
-            }
-
-
-
-            try {
-                if (clazz instanceof com.alibaba.fastjson2.JSONArray) {
-                    JSONArray tmp = new JSONArray();
-                    tmp.add(new JSONObject().put("code", 200));
-                    resultObject = tmp;
-                } else if (resultObject instanceof com.alibaba.fastjson2.JSONObject) {
-                    resultObject = new JSONObject().put("code", 200);
-                } else {
-                    return null;
+                JSONArray arr = new JSONArray();
+                for (int i = 0; i < arr.size(); ++i) {
+                    arr.add(JSONObject.from(((List<?>) resultSet).get(i)));
                 }
-                return resultObject;
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
+                rs.put("result", arr);
             }
-
-        } catch (InstantiationException e) {
+            return rs;
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+            return null;
         }
 
     }
