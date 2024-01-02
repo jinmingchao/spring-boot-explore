@@ -17,6 +17,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ *
+ *   SpringBoot + Mybatis Plus基本功能测试
+ *
+ *
+ */
 @RestController
 @RequestMapping("/user")
 public class UserController implements ApplicationRunner {

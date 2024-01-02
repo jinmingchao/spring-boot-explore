@@ -9,6 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+/**
+ *
+ *  SpringBoot 声明式事务@Transactional 功能测试
+ *
+ *
+ */
 @RestController
 @RequestMapping("/TAtest")
 public class TransactionTestController {
