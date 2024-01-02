@@ -1,9 +1,11 @@
 package explore.springboot.data.transaction.mapper;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 @TableName("user_info")
 public class User {
 

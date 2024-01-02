@@ -1,20 +1,18 @@
-
-
 server:
   port: 8000
 spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://${MYSQL_HOST:localhos}:${MYSQL_POST:336}/spring_boot_explore
-    driver-class-name: ${MYSQL_DRIVER_CLASS:com.mysql.cj.jdbc.Drive}
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_POST:3306}/spring_boot_explore
+    driver-class-name: ${MYSQL_DRIVER_CLASS:com.mysql.cj.jdbc.Driver}
   sql:
     init:
       schema-locations: classpath:db/schema-h2.sql
       data-locations: classpath:db/data-h2.sql
-  profiles:
-    include:
-      - mysqlconf
+#  profiles:
+#    include:
+#      - mysqlconf.yml
 #      - spyy.properties
 #logging:
 #  level:

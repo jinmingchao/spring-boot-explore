@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 import javax.sql.DataSource;
 import java.util.Arrays;
 
-//@MapperScan(basePackages = "explore.springboot.data.transaction.mapper")
+@MapperScan(basePackages = "explore.springboot.data.transaction.mapper")
 @SpringBootApplication
 public class ApplicationStarter {
 
