@@ -2,11 +2,11 @@ package explore.springboot.data.transaction.controller;
 
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
-import explore.springboot.data.transaction.mapper.User;
+import explore.springboot.data.transaction.mdm.entity.User;
 import explore.springboot.data.transaction.mapper.UserMapper;
 import explore.springboot.data.transaction.service.UserService;
 import explore.springboot.data.transaction.utils.ControllerResultGenerator;
-import jakarta.websocket.server.PathParam;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -21,8 +21,8 @@ import java.util.Random;
  *
  *   SpringBoot + Mybatis Plus基本功能测试
  *
- *
  */
+@Slf4j
 @RestController
 @RequestMapping("/user")
 public class UserController implements ApplicationRunner {
@@ -38,8 +38,6 @@ public class UserController implements ApplicationRunner {
     @PostMapping("/insert")
     public JSONObject addUser(@RequestBody User newUser) {
         JSONObject result = new JSONObject();
-//        UpdateWrapper<User> userAddWrapper = new UpdateWrapper<>();
-//        userAddWrapper.setEntity(newUser);
         int v = userMapper.insert(newUser);
         System.out.println("v: " + v);
         result.put("code", 200);
@@ -48,11 +46,9 @@ public class UserController implements ApplicationRunner {
     }
 
     @GetMapping("/queryAll")
-    public JSONObject queryAllUser() {
-        JSONObject result = new JSONObject();
+    public Object queryAllUser() {
         List<User> allUsers = userMapper.selectList(null);
-        result.put("result", JSONArray.toJSONString(allUsers));
-        return result;
+        return allUsers;
     }
 
     /**
@@ -65,7 +61,6 @@ public class UserController implements ApplicationRunner {
     public Object selectUserById(@PathVariable("id") Long id) {
         Map<String, Object> rMap = userMapper.selectUserById(id);
         return rMap;
-//        JSONObject resultObject
     }
 
     @GetMapping("/test_performance_schema")
@@ -91,6 +86,18 @@ public class UserController implements ApplicationRunner {
                 break;
             }
         }
+        return rMap;
+    }
+
+    @GetMapping("/logicdel/{id}")
+    public Object testPerformanceSchema(@PathVariable("id") Integer id) {
+        Map<String, Object> rMap = new HashMap();
+        rMap.put("msg", "success");
+        rMap.put("code", 200);
+
+        int cnt = userMapper.deleteById(id);
+        log.info("删除"+cnt+"条数据.");
+
         return rMap;
     }
 

@@ -36,6 +36,7 @@ public class TransactionTestController {
         return userService.testTransaction_1();
     }
 
+
     @GetMapping("/testTransaction_2")
     public Object testTransaction_2() throws TransactionCheckedException_1, TransactionCheckedException_2 {
         return userService.testTransaction_2();

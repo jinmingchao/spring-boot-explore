@@ -1,4 +1,4 @@
-DELETE FROM `user_info`;
+TRUNCATE TABLE `user_info`;
 
 INSERT INTO `user_info` (id, name, age, email) VALUES
 (1, 'Jone', 18, 'test1@baomidou.com'),
@@ -6,3 +6,10 @@ INSERT INTO `user_info` (id, name, age, email) VALUES
 (3, 'Tom', 28, 'test3@baomidou.com'),
 (4, 'Sandy', 21, 'test4@baomidou.com'),
 (5, 'Billie', 24, 'test5@baomidou.com');
+
+
+TRUNCATE TABLE `t_product`
+
+INSERT INTO `t_product` (id, name, price) VALUES
+(1, 'Alienware', 10000.012);
+

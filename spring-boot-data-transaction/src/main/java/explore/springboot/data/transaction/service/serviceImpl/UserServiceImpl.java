@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import explore.springboot.data.transaction.exception.checked.TransactionCheckedException_1;
 import explore.springboot.data.transaction.exception.checked.TransactionCheckedException_2;
 import explore.springboot.data.transaction.exception.unchecked.TransactionRuntimeException_1;
-import explore.springboot.data.transaction.mapper.User;
+import explore.springboot.data.transaction.mdm.entity.User;
 import explore.springboot.data.transaction.mapper.UserMapper;
 import explore.springboot.data.transaction.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,5 +129,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         i = userMapper.deleteById(uList.get(0));
         System.out.println("删除了" + i + "条数据");
         return uList;
+    }
+
+
+    /**
+     *
+     * 测试mybatis-plus分页插件
+     *
+     *
+     */
+    @Override
+    public Object testPagination_0() {
+
+//        userService.s
+        return null;
     }
 }

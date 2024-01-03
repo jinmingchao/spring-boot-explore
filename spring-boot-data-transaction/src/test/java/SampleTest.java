@@ -1,6 +1,6 @@
 import com.baomidou.mybatisplus.core.toolkit.Assert;
 import explore.springboot.data.transaction.ApplicationStarter;
-import explore.springboot.data.transaction.mapper.User;
+import explore.springboot.data.transaction.mdm.entity.User;
 import explore.springboot.data.transaction.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
