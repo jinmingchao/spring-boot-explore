@@ -4,11 +4,11 @@ CREATE TABLE `user_info` (
     `uid` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
     `user_name` varchar(30) DEFAULT NULL COMMENT '姓名',
     `age` int DEFAULT NULL COMMENT '年龄',
+    `sex` int DEFAULT NULL COMMENT '性别: 女:0 男:1',
     `email` varchar(50) DEFAULT NULL COMMENT '邮箱',
     `deleted` int DEFAULT '0' COMMENT '逻辑删除标记',
     PRIMARY KEY (`uid`) USING BTREE
 );
-
 
 CREATE TABLE `t_product` (
      `id` int NOT NULL AUTO_INCREMENT COMMENT '主键id',

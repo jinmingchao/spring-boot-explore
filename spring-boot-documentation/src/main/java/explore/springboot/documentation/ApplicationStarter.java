@@ -1,20 +1,17 @@
-package explore.springboot.data.transaction;
+package explore.springboot.documentation;
 
 
-import explore.springboot.data.transaction.mapper.UserMapper;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
 
 import javax.sql.DataSource;
 import java.util.Arrays;
 
-@MapperScan(basePackages = "explore.springboot.data.transaction.mapper")
 
+@MapperScan(basePackages = "explore.springboot.documentation.mapper")
 @SpringBootApplication
 public class ApplicationStarter {
 
@@ -22,7 +19,7 @@ public class ApplicationStarter {
         SpringApplication.run(ApplicationStarter.class, args);
     }
 
-    @Bean
+    //  @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 
         return new CommandLineRunner() {

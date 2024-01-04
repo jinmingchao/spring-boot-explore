@@ -1,5 +1,5 @@
 server:
-  port: 8000
+  port: 8100
 spring:
   datasource:
     username: root
@@ -8,8 +8,16 @@ spring:
     driver-class-name: ${MYSQL_DRIVER_CLASS:com.mysql.cj.jdbc.Driver}
   sql:
     init:
-      schema-locations: classpath:db/schema-h2.sql
-      data-locations: classpath:db/data-h2.sql
+      schema-locations: classpath:sql/schema.sql
+  config:
+    import:  [application-documentation.properties]
+#  web:
+#    resources:
+#      static-locations: [classpath:/resources/out/,classpath:/out/]
+
+#        - classpath:/webapp/templates/
+
+#      data-locations: classpath:db/data-h2.sql
 #  profiles:
 #    include:
 #      - mysqlconf.yml

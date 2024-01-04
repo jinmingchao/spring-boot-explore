@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<!--<script type="text/javascript">-->
+<!--    var v = [[${ctx}]]-->
+<!--</script>-->
+<script type="text/javascript" src="jquery-3.7.1.min.js"></script>
+<body>
+<div>
+    <form method="post" id="fileform" enctype="multipart/form-data">
+        <input type="file" name="doc">
+<!--        <input type="file" name="doc" onchange="fileChange();">-->
+    </form>
+
+    <span style="font-size:20px;">上传文件</span>
+    <button name="uploadDoc" onclick="uploadsubmit();">上传</button>
+    <span style="font-size:20px;">下载文件</span>
+    <button>下载</button>
+</div>
+<iframe style="display: none" name="uploadiframe"></iframe>
+</body>
+<script type="text/javascript">
+    // 上传按钮提交。
+    function uploadsubmit() {
+        if ($("#doc").val() == "") {
+            alert("请选择文件!")
+            return;
+        }
+        $("#fileform").attr("target", "uploadiframe");
+        $("#fileform").attr("action", "/documentation/upload");
+        $("#fileform").submit();
+    }
+</script>
+
+</html>

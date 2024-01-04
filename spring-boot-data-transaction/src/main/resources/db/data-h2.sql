@@ -11,5 +11,5 @@ INSERT INTO `user_info` (id, name, age, email) VALUES
 TRUNCATE TABLE `t_product`
 
 INSERT INTO `t_product` (id, name, price) VALUES
-(1, 'Alienware', 10000.012);
+(1, 'Alienware', 10000);
 

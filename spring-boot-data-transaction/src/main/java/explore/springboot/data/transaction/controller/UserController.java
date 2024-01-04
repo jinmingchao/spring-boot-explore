@@ -2,6 +2,7 @@ package explore.springboot.data.transaction.controller;
 
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
+import explore.springboot.data.transaction.enums.SexEnum;
 import explore.springboot.data.transaction.mdm.entity.User;
 import explore.springboot.data.transaction.mapper.UserMapper;
 import explore.springboot.data.transaction.service.UserService;
@@ -12,15 +13,10 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 /**
- *
- *   SpringBoot + Mybatis Plus基本功能测试
- *
+ * SpringBoot + Mybatis Plus基本功能测试
  */
 @Slf4j
 @RestController
@@ -43,6 +39,23 @@ public class UserController implements ApplicationRunner {
         result.put("code", 200);
 
         return result;
+    }
+
+    @GetMapping("/addaUser")
+    public Object addaUser() {
+        List<User> l = new LinkedList<>();
+        User newUser_1 = User.builder().email("2510996372@qq.com").age(99).sex(SexEnum.MALE).name("jinmingchao_male").build();
+        User newUser_2 = User.builder().email("2510996372@qq.com").age(88).sex(SexEnum.FEMALE).name("jinmingchao_female").build();
+        l.add(newUser_1);
+        l.add(newUser_2);
+        if (userService.saveBatch(l)) {
+            log.info("addaUser插入" + l.size() + "条数据成功.");
+        }
+        Map<String, Object> rMap = new HashMap();
+        rMap.put("msg", "success");
+        rMap.put("code", 200);
+
+        return rMap;
     }
 
     @GetMapping("/queryAll")
@@ -96,7 +109,7 @@ public class UserController implements ApplicationRunner {
         rMap.put("code", 200);
 
         int cnt = userMapper.deleteById(id);
-        log.info("删除"+cnt+"条数据.");
+        log.info("删除" + cnt + "条数据.");
 
         return rMap;
     }
