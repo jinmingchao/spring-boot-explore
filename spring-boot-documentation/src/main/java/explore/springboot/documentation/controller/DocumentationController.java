@@ -2,12 +2,12 @@ package explore.springboot.documentation.controller;
 
 import com.alibaba.fastjson2.JSONObject;
 import explore.springboot.documentation.service.DocumentationService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Slf4j
 @RestController
@@ -18,12 +18,24 @@ public class DocumentationController {
     DocumentationService documentationService;
 
     @PostMapping("/upload")
-    public Object uploadDoc(MultipartFile doc) {
+    public Object uploadDoc(MultipartHttpServletRequest request) {
+
         try {
             JSONObject res = new JSONObject();
             res.put("msg", "ok");
             res.put("code", 200);
-            return documentationService.uploadDoc(doc, res);
+
+            String uid = request.getParameter("uid");
+            MultipartFile doc = request.getFile("doc");
+            if (null == uid) {
+                res.put("msg", "uid cannot be null.");
+                return res;
+            }
+            if (null == doc) {
+                res.put("msg", "file cannot be null.");
+                return res;
+            }
+            return documentationService.uploadDoc(doc, uid, res);
         } catch (Exception e) {
             e.printStackTrace();
             log.error(e.getMessage());
@@ -34,10 +46,10 @@ public class DocumentationController {
         }
     }
 
+    @GetMapping("/download/{flag}")
+    public Object downloadDoc(@PathVariable String flag, HttpServletResponse response) {
 
-//    public Object downloadDoc(){
-//
-//    }
+    }
 
 
 //    public Object recoverDocToSpecificVersion(){

@@ -6,5 +6,5 @@ import explore.springboot.documentation.mdm.entity.Documentation;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface DocumentationService extends IService<Documentation> {
-        Object uploadDoc(MultipartFile doc, JSONObject res);
+        Object uploadDoc(MultipartFile doc, String uid, JSONObject res);
 }
