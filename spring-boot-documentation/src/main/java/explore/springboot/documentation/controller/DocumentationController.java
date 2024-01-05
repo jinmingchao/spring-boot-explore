@@ -5,12 +5,13 @@ import explore.springboot.documentation.service.DocumentationService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Slf4j
-@RestController
+@Controller
 @RequestMapping("/documentation")
 public class DocumentationController {
 
@@ -18,6 +19,7 @@ public class DocumentationController {
     DocumentationService documentationService;
 
     @PostMapping("/upload")
+    @ResponseBody
     public Object uploadDoc(MultipartHttpServletRequest request) {
 
         try {
@@ -46,9 +48,21 @@ public class DocumentationController {
         }
     }
 
-    @GetMapping("/download/{flag}")
-    public Object downloadDoc(@PathVariable String flag, HttpServletResponse response) {
-
+    @PostMapping("/download/{id}")
+    public void downloadDoc(@PathVariable String id, HttpServletResponse response) {
+        try {
+            JSONObject res = new JSONObject();
+            res.put("msg", "ok");
+            res.put("code", 200);
+            documentationService.downloadDoc(id, res, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error(e.getMessage());
+            JSONObject res = new JSONObject();
+            res.put("msg", "error");
+            res.put("code", 500);
+//            return res;
+        }
     }
 
 

@@ -10,13 +10,13 @@
 <div>
     <form method="post" id="fileform" enctype="multipart/form-data">
         <input type="file" name="doc">
-        <input type="hidden" name="uid" value="666">
+        <input type="hidden" name="uid" value="1743172356235128834">
     </form>
 
     <span style="font-size:20px;">上传文件</span>
     <button name="uploadDoc" onclick="uploadsubmit();">上传</button>
     <span style="font-size:20px;">下载文件</span>
-    <button>下载</button>
+    <button onclick="downloadFile(502095874)">下载</button>
 </div>
 <iframe style="display: none" name="uploadiframe"></iframe>
 </body>
@@ -29,6 +29,12 @@
         }
         $("#fileform").attr("target", "uploadiframe");
         $("#fileform").attr("action", "/documentation/upload");
+        $("#fileform").submit();
+    }
+
+    function downloadFile(id) {
+        $("#fileform").attr("target", "");
+        $("#fileform").attr("action", "/documentation/download/" + id);
         $("#fileform").submit();
     }
 </script>

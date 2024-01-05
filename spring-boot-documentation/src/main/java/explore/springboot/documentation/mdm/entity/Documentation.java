@@ -10,22 +10,45 @@ import java.util.Date;
 @Builder
 @TableName("t_documentation")
 public class Documentation {
+    /**
+     * 唯一主键
+     **/
+    @TableId(value = "id")
+    Integer id;
 
-    @TableId(value= "id", type= IdType.ASSIGN_ID)
-    Integer id;  /** 唯一主键 **/
+    /**
+     * 文件原名称
+     **/
+    @TableField("ori_name")
+    String oriName;
 
-    String name; /** 文件名称 **/
+    /**
+     * 文件后缀
+     **/
+    String extension;
 
-    String path; /** 文件存储路径 **/
+    /**
+     * 文件标记
+     **/
+    String flag;
 
+    /**
+     * 创建日期
+     **/
     @TableField("create_time")
-    Date createTime; /** 创建日期 **/
+    Date createTime;
 
+    /**
+     * 更新日期
+     **/
     @TableField("update_time")
-    Date updateTime; /** 更新日期 **/
+    Date updateTime;
 
+    /**
+     * 逻辑删除
+     **/
     @TableField("is_deleted")
     @TableLogic
-    Integer isDeleted; /** 逻辑删除 **/
+    Integer isDeleted;
 
 }

@@ -15,7 +15,8 @@ public class User {
     // type = IdType.AUTO 设置id生成方式为:type= IdType.AUTO(自增)
     //        默认是: IdType.ASSIGN_ID(默认): 雪花算法生成id
     //        雪花算法: 生成一个8字节Long类型数据，保证单表递增以及全局不重复
-    @TableId(value= "uid", type= IdType.AUTO)
+    // @TableId(value= "uid", type= IdType.AUTO)
+    @TableId(value= "uid")
     private Long id;
 
     //设置属性对应的字段名称
