@@ -61,13 +61,15 @@
         <mysql.connector.version>8.0.28</mysql.connector.version>
         <fastjson2.version>2.0.40</fastjson2.version>
         <jpa.version>3.2.0</jpa.version>
+        <jwt.version>0.11.5</jwt.version>
+        <springredis.version>3.1.5</springredis.version>
     </properties>
 
     <modules>
         <module>spring-boot-data-transaction</module> <!-- SpringBoot + MybatisPlus 测试事务 -->
         <module>spring-boot-explore-starter</module>  <!-- 各种官网的starter教程, SpringBoot基本应用 -->
-        <module>spring-boot-source-code</module>
-        <module>spring-boot-documentation</module>      <!-- SpringBoot源码探究 -->
+        <module>spring-boot-source-code</module>      <!-- SpringBoot源码探究 -->
+        <module>spring-boot-documentation</module>
     </modules>
 
     <dependencyManagement>
@@ -119,6 +121,25 @@
                 <version>${jpa.version}</version>
             </dependency>
             <!-- jpa end -->
+            <!-- spring security start-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>3.2.0</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
+            <!-- spring security end-->
+            <!-- spring redis start-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${springredis.version}</version>
+            </dependency>
+            <!-- spring redis end -->
         </dependencies>
     </dependencyManagement>
 </project>
