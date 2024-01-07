@@ -6,7 +6,7 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://192.168.239.11:3306}/spring_boot_explore
+    url: jdbc:mysql://192.168.239.11:3306/spring_boot_explore
     driver-class-name: com.mysql.cj.jdbc.Driver
   sql:
     init:

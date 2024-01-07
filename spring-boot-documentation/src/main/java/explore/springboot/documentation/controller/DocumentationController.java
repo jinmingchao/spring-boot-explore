@@ -28,7 +28,9 @@ public class DocumentationController {
             res.put("code", 200);
 
             String uid = request.getParameter("uid");
+            String pid = request.getParameter("pid");
             MultipartFile doc = request.getFile("doc");
+
             if (null == uid) {
                 res.put("msg", "uid cannot be null.");
                 return res;
@@ -37,7 +39,17 @@ public class DocumentationController {
                 res.put("msg", "file cannot be null.");
                 return res;
             }
-            return documentationService.uploadDoc(doc, uid, res);
+
+            Long pid_long = -1L;
+            try {
+                pid_long = null == pid ? -1L : Long.parseLong(pid);
+            } catch (Exception e) {
+                e.printStackTrace();
+                log.error(e.getMessage());
+                res.put("msg", "pid format error.");
+            }
+
+            return documentationService.uploadDoc(doc, uid, pid_long, res);
         } catch (Exception e) {
             e.printStackTrace();
             log.error(e.getMessage());
@@ -49,7 +61,7 @@ public class DocumentationController {
     }
 
     @PostMapping("/download/{id}")
-    public void downloadDoc(@PathVariable String id, HttpServletResponse response) {
+    public void downloadDoc(@PathVariable Long id, HttpServletResponse response) {
         try {
             JSONObject res = new JSONObject();
             res.put("msg", "ok");
@@ -59,12 +71,28 @@ public class DocumentationController {
             e.printStackTrace();
             log.error(e.getMessage());
             JSONObject res = new JSONObject();
-            res.put("msg", "error");
+            res.put("msg", "internal error");
             res.put("code", 500);
 //            return res;
         }
     }
 
+    @PostMapping("/recover/{id}")
+    public void recoverDoc(@PathVariable Long id, HttpServletResponse response) {
+        try {
+            JSONObject res = new JSONObject();
+            res.put("msg", "ok");
+            res.put("code", 200);
+            documentationService.recoverDoc(id, res, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error(e.getMessage());
+            JSONObject res = new JSONObject();
+            res.put("msg", "internal error");
+            res.put("code", 500);
+//            return res;
+        }
+    }
 
 //    public Object recoverDocToSpecificVersion(){
 //

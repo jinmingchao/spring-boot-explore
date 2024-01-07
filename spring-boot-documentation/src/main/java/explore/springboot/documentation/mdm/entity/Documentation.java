@@ -14,7 +14,12 @@ public class Documentation {
      * 唯一主键
      **/
     @TableId(value = "id")
-    Integer id;
+    Long id;
+
+    /**
+     * 对应初始版本文件id, -1: 自身即为初始版本
+     **/
+    Long pid = -1L;
 
     /**
      * 文件原名称

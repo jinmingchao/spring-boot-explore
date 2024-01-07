@@ -3,14 +3,14 @@ server:
 spring:
   datasource:
     username: root
-    password: root
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_POST:3306}/spring_boot_explore
+    password: Forgive1!
+    url: jdbc:mysql://${MYSQL_HOST:192.168.239.12}:${MYSQL_POST:3306}/spring_boot_explore
     driver-class-name: ${MYSQL_DRIVER_CLASS:com.mysql.cj.jdbc.Driver}
   sql:
     init:
       schema-locations: classpath:sql/schema.sql
   config:
-    import:  [application-work-documentation.properties]
+    import:  [application-home-documentation.properties]
 #  web:
 #    resources:
 #      static-locations: [classpath:/resources/out/,classpath:/out/]

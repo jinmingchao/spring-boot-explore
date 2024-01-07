@@ -8,7 +8,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface DocumentationService extends IService<Documentation> {
 
-        Object uploadDoc(MultipartFile doc, String uid, JSONObject result);
+    Object uploadDoc(MultipartFile doc, String uid, Long pid, JSONObject result);
 
-        Object downloadDoc(String flag, JSONObject result, HttpServletResponse response);
+    Object downloadDoc(Long flag, JSONObject result, HttpServletResponse response);
+
+    Object recoverDoc(Long flag, JSONObject result, HttpServletResponse response);
+
 }

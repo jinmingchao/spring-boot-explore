@@ -11,12 +11,15 @@
     <form method="post" id="fileform" enctype="multipart/form-data">
         <input type="file" name="doc">
         <input type="hidden" name="uid" value="1743172356235128834">
+        <input type="hidden" name="pid" value="1743959905832955905">
     </form>
 
     <span style="font-size:20px;">上传文件</span>
     <button name="uploadDoc" onclick="uploadsubmit();">上传</button>
     <span style="font-size:20px;">下载文件</span>
-    <button onclick="downloadFile(502095874)">下载</button>
+    <button onclick="downloadFile('1743938053433663490')">下载</button>
+    <span style="font-size:20px;">恢复到初始版本</span>
+    <button onclick="recoverFile('1743959905832955905')">恢复</button>
 </div>
 <iframe style="display: none" name="uploadiframe"></iframe>
 </body>
@@ -35,6 +38,12 @@
     function downloadFile(id) {
         $("#fileform").attr("target", "");
         $("#fileform").attr("action", "/documentation/download/" + id);
+        $("#fileform").submit();
+    }
+
+    function recoverFile(pid){
+        $("#fileform").attr("target", "");
+        $("#fileform").attr("action", "/documentation/recover/" + pid);
         $("#fileform").submit();
     }
 </script>
