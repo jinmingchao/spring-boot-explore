@@ -1,0 +1,35 @@
+server:
+  port: 8101
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_POST:3306}/spring_boot_explore
+    driver-class-name: ${MYSQL_DRIVER_CLASS:com.mysql.cj.jdbc.Driver}
+  sql:
+    init:
+      schema-locations: classpath:sql/schema.sql
+  config:
+    import:  [application-work-jwt-auth.yml, application-work-redis.yml]
+
+#  web:
+#    resources:
+#      static-locations: [classpath:/resources/out/,classpath:/out/]
+
+#        - classpath:/webapp/templates/
+
+#      data-locations: classpath:db/data-h2.sql
+#  profiles:
+#    include:
+#      - mysqlconf.yml
+#      - spyy.properties
+#logging:
+#  level:
+#    # 指定整个项目的日志级别
+#    root: info
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #com.baomidou.mybatisplus.extension.p6spy.StdoutLogger
+
+
+
