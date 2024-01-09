@@ -6,6 +6,7 @@ import com.bidpages.mdm.entity.SysUser;
 import com.bidpages.mdm.vo.SysUserVO;
 import com.bidpages.service.LoginService;
 import com.bidpages.utils.JwtUtil;
+import com.bidpages.utils.RedisCache;
 import com.bidpages.utils.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -21,7 +22,7 @@ public class LoginServiceImpl implements LoginService {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisCache redisCache;
 
     @Override
     public ResponseResult login(SysUserVO user) {
@@ -42,7 +43,8 @@ public class LoginServiceImpl implements LoginService {
         //用户信息&权限存入缓存
         //类型使用redis string类型
         //格式为: login:{USERID} loginSysUser
-        redisTemplate.opsForValue().set("login:" + loginUser.getId().toString(), JSONObject.toJSONString(loginSysUser));
+        redisCache.setCacheObject("login:" + loginUser.getId().toString(),loginSysUser);
+//        redisTemplate.opsForValue().set("login:" + loginUser.getId().toString(), JSONObject.toJSONString(loginSysUser));
         return new ResponseResult(200, "登陆成功!", jwt);
     }
 }

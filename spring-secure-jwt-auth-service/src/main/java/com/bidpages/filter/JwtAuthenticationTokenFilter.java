@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.bidpages.auth.LoginSysUser;
 import com.bidpages.mdm.entity.SysUser;
 import com.bidpages.utils.JwtUtil;
+import com.bidpages.utils.RedisCache;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,8 +27,11 @@ import java.io.IOException;
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
+//    @Autowired
+//    private RedisTemplate redisTemplate;
+
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisCache redisCache;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -51,12 +55,14 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         }
         //2. 从redis中获取用户信息
         String redisKey = "login:" + userId;
-        Object loginUser_json = redisTemplate.opsForValue().get(redisKey);
-        if (null == loginUser_json) {
+
+       LoginSysUser loginSysUser    = redisCache.getCacheObject(redisKey);
+//        Object loginUser_json = redisTemplate.opsForValue().get(redisKey);
+        if (null == loginSysUser) {
             throw new RuntimeException("用户未登录或不存在");
         }
 
-        LoginSysUser loginSysUser = JSONObject.toJavaObject(JSONObject.parseObject((String) loginUser_json), LoginSysUser.class);
+//        LoginSysUser loginSysUser = JSONObject.toJavaObject(JSONObject.parseObject((String) loginUser_json), LoginSysUser.class);
         //TODO 3. 获取权限信息
         //4. 存入Security上下文中
         //UsernamePasswordAuthenticationToken构造器用三个参数的，带权限的, 必须用, 因为里面有this.setAuthenticated(true),通知后面的过滤器该用户已经登录
