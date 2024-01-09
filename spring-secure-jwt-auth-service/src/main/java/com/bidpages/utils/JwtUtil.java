@@ -1,10 +1,13 @@
 package com.bidpages.utils;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.SecretKey;
+import java.security.Key;
 import java.util.Date;
 
 //注册组件
@@ -17,24 +20,24 @@ public class JwtUtil {
 
     private static final Long EXPIRE = 1 * 24 * 60 * 60 * 1000L; //token过期时间, 单位毫秒
 
-    public static final String APP_SECRET = "ukc8BDbRigUDaY6pZFfWus2jZWLPHO"; //秘钥
+//    public static final String APP_SECRET = "ukc8BDbRigUDaY6pZFfWus2jZWLPHO"; //秘钥
+    static SecretKey secretKey =  Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     public static void main(String[] args) {
 
     }
 
-    public static String createJWT(String sysUserJson) {
+    public static String createJWT(String text) {
+
         String JwtToken = Jwts.builder()
                 .setHeaderParam("typ", "JWT")
                 .setHeaderParam("alg", "HS256")
 
-                .setSubject("guli-user")
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
 
-                .claim("sysUserJson", sysUserJson)  //设置token主体部分 ，存储用户信息
-
-                .signWith(SignatureAlgorithm.ES512, APP_SECRET)
+                .claim("sysUserJson", text)  //设置token主体部分 ，存储用户信息
+                .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
         return JwtToken;
     }
@@ -44,7 +47,7 @@ public class JwtUtil {
         try {
 //            Jwts.parserBuilder().
             claims = Jwts.parser()
-                    .setSigningKey(APP_SECRET)
+                    .setSigningKey(secretKey)
                     .parseClaimsJws(JwtToken)
                     .getBody();
         } catch (ExpiredJwtException e) {
@@ -70,7 +73,7 @@ public class JwtUtil {
     public static boolean checkToken(String jwtToken) {
         if (null == jwtToken) return false;
         try {
-            Jwts.parser().setSigningKey(APP_SECRET).parseClaimsJws(jwtToken);
+            Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken);
         } catch (Exception e) {
             e.printStackTrace();
             return false;

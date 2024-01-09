@@ -61,6 +61,14 @@
                     <target>16</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>16</source>
+                    <target>16</target>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <parent>
@@ -85,7 +93,9 @@
         <mysql.connector.version>8.0.28</mysql.connector.version>
         <fastjson2.version>2.0.40</fastjson2.version>
         <jpa.version>3.2.0</jpa.version>
-        <jwt.version>0.11.5</jwt.version>
+        <jwt.api.version>0.11.5</jwt.api.version>
+        <jwt.impl.version>0.11.5</jwt.impl.version>
+        <jwt.jackson.version>0.11.5</jwt.jackson.version>
         <springredis.version>3.1.5</springredis.version>
     </properties>
 
@@ -155,8 +165,19 @@
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt-api</artifactId>
-                <version>${jwt.version}</version>
+                <version>${jwt.api.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jwt.impl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jwt.jackson.version}</version>
+            </dependency>
+
             <!-- spring security end-->
             <!-- spring redis start-->
             <dependency>
