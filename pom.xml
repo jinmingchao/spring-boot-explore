@@ -69,6 +69,22 @@
                     <target>16</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>16</source>
+                    <target>16</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>16</source>
+                    <target>16</target>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <parent>
@@ -104,7 +120,8 @@
         <module>spring-boot-explore-starter</module>  <!-- 各种官网的starter教程, SpringBoot基本应用 -->
         <module>spring-boot-source-code</module>      <!-- SpringBoot源码探究 -->
         <module>spring-boot-documentation</module>    <!-- BidPages产品 业务逻辑模块 -->
-        <module>spring-secure-jwt-auth-service</module> <!-- BidPages产品 登陆鉴权模块 -->
+        <module>spring-secure-jwt-auth-service</module>
+        <module>spring-secure-fe</module> <!-- BidPages产品 登陆鉴权模块 -->
     </modules>
 
     <dependencyManagement>

@@ -1,6 +1,7 @@
 package com.bidpages.configuration;
 
 import com.bidpages.filter.JwtAuthenticationTokenFilter;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 
@@ -18,6 +19,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 
 //TODO 找找这个配置的官方文档
@@ -57,7 +60,12 @@ public class SecurityConfig {
         );
         //JWT 过滤器加入到 UsernamePasswordAuthenticationFilter 过滤器之前
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
-        return http.build();
+
+
+        //spring security 允许跨域
+        http.cors();
+//        http.cors((corsConfigurer -> corsConfigurer.configure(http)));
+         return http.build();
 
     }
 
@@ -72,5 +80,6 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
+
 
 }

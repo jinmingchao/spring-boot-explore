@@ -1,0 +1,24 @@
+server:
+  port: 8102
+
+#  web:
+#    resources:
+#      static-locations: [classpath:/resources/out/,classpath:/out/]
+
+#        - classpath:/webapp/templates/
+
+#      data-locations: classpath:db/data-h2.sql
+#  profiles:
+#    include:
+#      - mysqlconf.yml
+#      - spyy.properties
+#logging:
+#  level:
+#    # 指定整个项目的日志级别
+#    root: info
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #com.baomidou.mybatisplus.extension.p6spy.StdoutLogger
+
+
+

@@ -20,6 +20,7 @@ public class FastJsonRedisSerializer<T> implements RedisSerializer<T> {
         ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
         //TODO fastjson默认关闭类型转化autoType, 注意为指定的需要序列化/反序列化的实体类开启
         ParserConfig.getGlobalInstance().addAccept("com.bidpages.auth.LoginSysUser");
+//        ParserConfig.getGlobalInstance().addAccept("javax.crypto.spec.SecretKeySpec.algorithm");
     }
 
     public FastJsonRedisSerializer(Class<T> clazz) {

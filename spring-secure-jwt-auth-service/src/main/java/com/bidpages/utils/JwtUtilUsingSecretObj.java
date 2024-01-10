@@ -1,13 +1,12 @@
 package com.bidpages.utils;
 
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.Keys;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
-import java.security.Key;
 import java.util.Date;
 
 //注册组件
@@ -16,18 +15,17 @@ import java.util.Date;
 @Data
 //@ConfigurationProperties("jwt.data")
 @Slf4j
-public class JwtUtil {
+public class JwtUtilUsingSecretObj {
 
-    private static final Long EXPIRE = 1 * 24 * 60 * 60 * 1000L; //token过期时间, 单位毫秒
+    private static final Long EXPIRE = 1 * 24 * 60 * 60 * 1000L; //token过期时间, 单位毫秒, 1天
 
-//    public static final String APP_SECRET = "ukc8BDbRigUDaY6pZFfWus2jZWLPHO"; //秘钥
-    static SecretKey secretKey =  Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    //    public static final String APP_SECRET = "ukc8BDbRigUDaY6pZFfWus2jZWLPHO"; //秘钥
+//    static SecretKey secretKey;
+    @Autowired
+    private RedisCache redisCache;
 
-    public static void main(String[] args) {
-
-    }
-
-    public static String createJWT(String text) {
+    public String createJWT(String text) {
+        SecretKey secretKey = redisCache.getCacheObject("loginAuth:secretKey");
 
         String JwtToken = Jwts.builder()
                 .setHeaderParam("typ", "JWT")
@@ -42,7 +40,9 @@ public class JwtUtil {
         return JwtToken;
     }
 
-    public static String parseJWT(String JwtToken) {
+    public String parseJWT(String JwtToken) {
+        SecretKey secretKey = redisCache.getCacheObject("loginAuth:secretKey");
+
         Claims claims = null;
         try {
 //            Jwts.parserBuilder().
@@ -71,15 +71,22 @@ public class JwtUtil {
      * @return
      */
     public static boolean checkToken(String jwtToken) {
-        if (null == jwtToken) return false;
-        try {
-            Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+
+//        if (null == jwtToken) return false;
+//        try {
+//            Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return false;
+//        }
         return true;
     }
+
+//    @Override
+//    public void run(ApplicationArguments args) throws Exception {
+//        SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+//        redisCache.setCacheObject("loginAuth:secretKey", secretKey);
+//    }
 
 //    //创建对象主体
 //    private static final String CLAIM_KEY_USERNAME = "subject";

@@ -1,16 +1,14 @@
 package com.bidpages.filter;
 
-import com.alibaba.fastjson.JSONObject;
 import com.bidpages.auth.LoginSysUser;
-import com.bidpages.mdm.entity.SysUser;
-import com.bidpages.utils.JwtUtil;
+import com.bidpages.utils.JwtUtilUsingSecretObj;
+import com.bidpages.utils.JwtUtilUsingSecretString;
 import com.bidpages.utils.RedisCache;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -45,7 +43,10 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         }
         String userId = null;
         try {
-            userId = JwtUtil.parseJWT(jwtToken);
+            JwtUtilUsingSecretObj jwtUtil = new JwtUtilUsingSecretObj();
+//            userId = jwtUtil.parseJWT(jwtToken);
+//            userId = JwtUtilUsingSecretObj.parseJWT(jwtToken);
+            userId = JwtUtilUsingSecretString.parseJWT(jwtToken);
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("jwttoken非法");

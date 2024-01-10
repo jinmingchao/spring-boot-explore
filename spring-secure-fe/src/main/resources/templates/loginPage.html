@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>登陆页</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<script type="text/javascript" src="jquery-3.7.1.min.js"></script>
+<body>
+<div>
+    <form method="post" id="loginform">
+        <label for="username">用户名:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">密码:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button name="loginSubmit" onclick="loginSubmit()" value="登录" text="登陆">登陆</button>
+    </form>
+</div>
+<iframe style="display: none" name="uploadiframe"></iframe>
+</body>
+<script type="text/javascript">
+
+    function loginSubmit() {
+        var username = $("#username").val();
+        var password = $("#password").val();
+
+        console.log("username: " + username);
+        console.log("password: " + password);
+        // url: "http://173.168.0.14:8101/user/login",
+        $.ajax({
+            type: "POST",
+            url: "http://127.0.0.1:8101/user/login",
+            data: {
+                // 提交给服务器的数据
+                username: username,
+                password: password,
+            },
+            success: function(response) {
+                console.log("msg: " +msg);
+                //获取jwt
+                if (response.hasOwnProperty(key)) {
+                    var value = response[key];
+                    console.log("Key: ", key, " Value: ", value);
+                }
+                //
+            },
+            error: function() {
+                alert("提交表单失败!!");
+                // 如果请求失败则会进入此函数中
+                //console.error("Error occurred while making the request.");
+            }
+        });
+    }
+
+    // 上传按钮提交。
+    function uploadsubmit() {
+        if ($("#doc").val() == "") {
+            alert("请选择文件!")
+            return;
+        }
+        $("#fileform").attr("target", "uploadiframe");
+        $("#fileform").attr("action", "/documentation/upload");
+        $("#fileform").submit();
+    }
+
+    function downloadFile(id) {
+        $("#fileform").attr("target", "");
+        $("#fileform").attr("action", "/documentation/download/" + id);
+        $("#fileform").submit();
+    }
+
+    function recoverFile(pid) {
+        $("#fileform").attr("target", "");
+        $("#fileform").attr("action", "/documentation/recover/" + pid);
+        $("#fileform").submit();
+    }
+</script>
+
+</html>

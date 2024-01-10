@@ -5,7 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 
 import javax.sql.DataSource;
 import java.util.Arrays;
@@ -15,11 +15,14 @@ import java.util.Arrays;
 @SpringBootApplication
 public class JwtApplicationStarter {
 
+//    @Autowired
+//    private static RedisCache redisCache;
+
     public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(JwtApplicationStarter.class, args);
+        SpringApplication.run(JwtApplicationStarter.class, args);
     }
 
-    //  @Bean
+    @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 
         return new CommandLineRunner() {
