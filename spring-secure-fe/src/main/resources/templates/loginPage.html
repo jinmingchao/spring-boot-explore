@@ -6,6 +6,7 @@
 </head>
 
 <script type="text/javascript" src="jquery-3.7.1.min.js"></script>
+
 <body>
 <div>
     <form method="post" id="loginform">
@@ -14,31 +15,35 @@
 
         <label for="password">密码:</label>
         <input type="password" id="password" name="password" required>
-
-        <button name="loginSubmit" onclick="loginSubmit()" value="登录" text="登陆">登陆</button>
     </form>
+
+    <button name="loginSubmit" onclick="loginSubmit()" value="登录" text="登陆">登陆</button>
 </div>
 <iframe style="display: none" name="uploadiframe"></iframe>
-</body>
 <script type="text/javascript">
 
     function loginSubmit() {
         var username = $("#username").val();
         var password = $("#password").val();
-
+        var url = "http://localhost:18102/loginlocal"; //localhost才能识别为非跨域请求,127.0.0.1仍然识别为跨域
         console.log("username: " + username);
         console.log("password: " + password);
+        console.log("url: " + url);
+        alert("do ajax request.");
+        // $("#loginform").attr("target", "uploadiframe");
+        // $("#loginform").submit();
         // url: "http://173.168.0.14:8101/user/login",
         $.ajax({
             type: "POST",
-            url: "http://127.0.0.1:8101/user/login",
+            // url: "http://127.0.0.1:8101/user/login",
+            url: url,
             data: {
                 // 提交给服务器的数据
                 username: username,
                 password: password,
             },
             success: function(response) {
-                console.log("msg: " +msg);
+                console.og("msg: " +msg);
                 //获取jwt
                 if (response.hasOwnProperty(key)) {
                     var value = response[key];
@@ -53,29 +58,8 @@
             }
         });
     }
-
-    // 上传按钮提交。
-    function uploadsubmit() {
-        if ($("#doc").val() == "") {
-            alert("请选择文件!")
-            return;
-        }
-        $("#fileform").attr("target", "uploadiframe");
-        $("#fileform").attr("action", "/documentation/upload");
-        $("#fileform").submit();
-    }
-
-    function downloadFile(id) {
-        $("#fileform").attr("target", "");
-        $("#fileform").attr("action", "/documentation/download/" + id);
-        $("#fileform").submit();
-    }
-
-    function recoverFile(pid) {
-        $("#fileform").attr("target", "");
-        $("#fileform").attr("action", "/documentation/recover/" + pid);
-        $("#fileform").submit();
-    }
 </script>
+</body>
+
 
 </html>

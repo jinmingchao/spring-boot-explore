@@ -2,6 +2,8 @@ package fe.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 /**
@@ -11,10 +13,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MVCController {
 
     @GetMapping("/login")
-    public String helloPage(){
+    public String helloPage() {
         //跳转登录表单页面
         return "loginPage";
     }
 
-    public String testCors()
+
+    @PostMapping("/loginlocal")
+    public String testCors() {
+        return "helloworld";
+    }
 }
