@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Bean;
 
 import javax.sql.DataSource;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @MapperScan(basePackages = "com.bidpages.mapper")
@@ -19,7 +22,10 @@ public class JwtApplicationStarter {
 //    private static RedisCache redisCache;
 
     public static void main(String[] args) {
+
         SpringApplication.run(JwtApplicationStarter.class, args);
+        Map<String, String> m =new HashMap();
+         List<String> s = (List<String>) m.values();
     }
 
     @Bean

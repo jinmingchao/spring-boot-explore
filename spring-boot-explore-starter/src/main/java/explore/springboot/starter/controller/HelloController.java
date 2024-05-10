@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 //@RestController = @Controller + @ResponseBody
-//返回数据, 不返回试图
+//返回数据, 不返回视图
 
 @RestController
 public class HelloController {
